@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "backend": "python -m uvicorn app.web_api:app --reload --port 8000"
+    "backend": "python3 -m uvicorn app.web_api:app --reload --port 8000"
   },
   "type": "module",
   "keywords": [],

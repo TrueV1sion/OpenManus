@@ -68,7 +68,14 @@ async def run_agent(request: AgentRequest):
     try:
         logger.info(f"Received request for conversation {request.conversation_id}")
 
-        agent = Manus()
+        try:
+            agent = Manus()
+        except FileNotFoundError as config_error:
+            logger.error("Configuration file not found")
+            raise HTTPException(
+                status_code=503,
+                detail="LLM configuration not set up. Please create config/config.toml with your API credentials. See config/config.example.toml for reference."
+            )
 
         result = await agent.run(request.message)
 
@@ -90,6 +97,8 @@ async def run_agent(request: AgentRequest):
             steps=steps,
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error processing request: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
