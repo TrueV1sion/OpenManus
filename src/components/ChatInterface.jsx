@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Send, Loader2, AlertCircle, Bot } from 'lucide-react'
+import { Send, Loader as Loader2, CircleAlert as AlertCircle, Bot } from 'lucide-react'
 import MessageItem from './MessageItem'
 import { useMessages } from '../hooks/useMessages'
 
